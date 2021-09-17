@@ -31,9 +31,7 @@ module.exports = {
             if(compare == true){
                 console.log("密码正确")
                 //生成token
-                const token = jwt.sign({password: req.body.password}, config.jwtKey, {
-                    expiresIn: '1h'
-                })
+                const token = jwt.sign({password: req.body.password}, config.jwtKey, {expiresIn: '1h'})
                 res.send({
                     status: 200,
                     msg: '登录成功',

@@ -9,10 +9,12 @@ const config = require('./config/index')
 const app = express()
 const indexRouter = require('./routes/index')
 const loginRouter = require('./routes/login')
+const test = require('./routes/test')
 
 
 //设置跨域请求
 app.all("*", (req, res, next) => {
+    // 这里填写你运行进行跨域的主机ip
     res.header(
       "Access-Control-Allow-Origin",
       req.headers.origin || req.headers.referer || "*"
@@ -21,19 +23,43 @@ app.all("*", (req, res, next) => {
       "Access-Control-Allow-Headers",
       "Content-Type, Authorization, X-Requested-With"
     );
+    // 允许的访问方法
     res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
     res.header("Access-Control-Allow-Credentials", true); //可以带cookies
     res.header("X-Powered-By", "Express");
-    // if (req.method == "OPTIONS") {
-    //   res.sendStatus(200);
-    // } else {
-    //   next();
-    // }
-    next();
+    // OPTIONS请求直接返回（前端跨域请求时，会发送两次请求，第一次OPTIONS测试服务器，第二次才是真正的POST、GET请求）
+    if (req.method == "OPTIONS") {
+      res.sendStatus(200);
+    } else {
+      next();
+    }
 });
+//----------------------------------使用express-jwt中间件-------------------------
 
-// 解析token
-// app.use(expJWT({ secret: config.jwtKey, algorithms: ['HS256']}).unless({path: ['/login']}))
+// app.use(function (err, req, res, next) {
+//     if (err.name === 'UnauthorizedError') {
+//       res.status(401).send('invalid token...');
+//     }
+// })
+
+//解析token
+// app.use(expJWT({ 
+//     secret: config.jwtKey, 
+//     algorithms: ['HS256'],
+//     credentialsRequired: false,
+//     getToken: function fromHeaderOrQuerystring (req) {
+//         if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
+//             return req.headers.authorization.split(' ')[1];
+//         } else if (req.query && req.query.token) {
+//         return req.query.token;
+//         }
+//         return null;
+//     }
+// }).unless({path: ['/login']}))
+
+//-----------------------------------------------------------------------------------
+
+
 
 //获取req的body
 app.use(express.json())
@@ -109,6 +135,8 @@ app.use('/toLogin', loginRouter)
 //         title: '登录'
 //     })
 // })
+
+app.use('/test', test)
 
 app.post('/toRegister',(req,res)=>{
     res.render('register',{
