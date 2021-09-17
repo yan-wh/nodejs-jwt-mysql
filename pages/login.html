@@ -1,0 +1,92 @@
+<%- include('header.html') -%>
+    
+    <div class="container" style="height: 80%;">
+        <form class="registerForm">
+            <div class="form-group">
+                <label>姓名</label>
+                <input type="text" class="form-control" name="username" />
+            </div>
+            <div class="form-group">
+                <label>电话</label>
+                <input type="text" class="form-control" name="phone" />
+            </div>
+            <div class="form-group">
+                <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('.registerForm')
+                .bootstrapValidator({
+                    message: 'This value is not valid',
+                    feedbackIcons: {
+                        valid: 'glyphicon glyphicon-ok',
+                        invalid: 'glyphicon glyphicon-remove',
+                        validating: 'glyphicon glyphicon-refresh'
+                    },
+                    fields: {
+                        username: {
+                            message: 'The username is not valid',
+                            validators: {
+                                notEmpty: {
+                                    message: '用户名不能为空'
+                                },
+                                stringLength: {
+                                    min: 2,
+                                    max: 20,
+                                    message: '请输入2~20位的字符!'
+                                },
+                                regexp: {
+                                    regexp: /^([\u4E00-\uFA29]|[\uE7C7-\uE7F3]|[a-zA-Z0-9])*$/,
+                                    message: '请输入中文字符的用户名称!'
+                                }
+                            }
+                        },
+                        phone: {
+                            message: 'The phone is not valid',
+                            validators: {
+                                notEmpty: {
+                                    message: 'The email is required and cannot be empty'
+                                },
+                                regexp: {
+                                    regexp: /^(((13|14|15|18|17)\d{9}))$/,
+                                    message: '请输入正确的手机号码!'
+                                }
+                            }
+                        }
+                    },
+                    // submitHandler: function (validator, form, submitButton) {
+                    //     console.log("我是validator、form、submitButton",validator+"---"+form+"---"+submitButton)
+                    // }
+                })
+            
+                .on('submit',(e)=>{
+                    let a = .prototype.toString
+                    // Prevent form submission
+                    e.preventDefault();
+
+                    // Get the form instance
+                    let $form = $(e.target);
+                    let dataArray = $form.serializeArray()
+                    let data = {}
+                    dataArray.map((item,index)=>{
+                        data[item.name] = item.value
+                    })
+                    let Data = JSON.stringify(data)
+                    console.log("我是form表单数据",Data)
+                    request({url: '/login', type: 'post', Data})
+                    .then(res=>{
+                        console.log("login页面请求的数据",res)
+                    })
+                    .catch(err=>{
+                        console.log("请求数据发生错误",err)
+                    })
+                    return false
+                })
+                
+        });
+    </script>
+
+<%- include('footer.html') -%>
