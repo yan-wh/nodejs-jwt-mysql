@@ -59,3 +59,42 @@
 // console.log('之前')
 // doSomething()
 // console.log('之后')
+
+var arr = [1,2,3,5,4], mark;
+const judge = ()=>{
+    for(var i = 0; i < arr.length; i++){
+        console.log(i)
+        if(arr[i] == 2){
+            console.log("纳尼")
+            return mark = true;
+        }
+        console.log("继续执行")
+    }
+}
+judge()
+console.log("mark",mark)
+
+// function makeAdder(x) {
+//     console.log("x",x)
+//     return function(y) {
+//         console.log("y",y)
+//       return x + y;
+//     };
+// }
+
+// var add5 = makeAdder(5);
+// var add10 = makeAdder(10);
+
+// console.log(add5(2));  // 7  相当于传两个参数，一个是 5 ，一个是 2 
+// console.log(add10(2)); // 12
+
+
+// var add = (function () {
+//     var counter = 0;
+//     return function () {return counter += 1;}
+// })();
+ 
+// console.log(add())
+// console.log(add())
+// console.log(add())
+

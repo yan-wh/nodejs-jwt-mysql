@@ -14,6 +14,9 @@ const test = require('./routes/test')
 
 //设置跨域请求
 app.all("*", (req, res, next) => {
+
+    //使用原生node的http模块，那就用res.setHeader，使用express框架，那就用res.header
+    
     // 这里填写你运行进行跨域的主机ip
     res.header(
       "Access-Control-Allow-Origin",
@@ -117,7 +120,7 @@ class Res{
 //pages下页面路由
 
 // app.get('/getData/test')相当于 app.use('/getData')+router.get('/test')
-app.use('/', indexRouter)
+app.use('/index', indexRouter)
 
 
 // app.get('/index',(req,res)=>{
