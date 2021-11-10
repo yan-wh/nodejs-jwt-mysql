@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./static/js/jquery-3.5.1.js" type="text/javascript"></script>
+    <title>Document</title>
+
+    <script type="text/javascript">
+        function draw(){
+            var canvas = document.getElementById("canvas")
+            var canvas1 = document.getElementById("canvas1")
+            if(canvas.getContext){
+                var ctx = canvas.getContext('2d')
+    
+                ctx.fillStyle = 'rgb(200,0,0)'
+                ctx.fillRect(10,10,55,50)
+    
+                ctx.fillStyle = "rgba(0, 0, 200, 0.5)"
+                ctx.fillRect (30, 30, 55, 50)
+            }
+            if(canvas1.getContext){
+                var ctx = canvas1.getContext('2d')
+    
+                ctx.fillStyle = 'rgb(100,0,0)'
+                ctx.fillRect(10,10,55,50)
+    
+                ctx.fillStyle = "rgba(0, 0, 100, 0.5)"
+                ctx.fillRect (30, 30, 55, 50)
+            }
+        }
+    </script>
+
+</head>
+
+<body onload="draw()">
+    <div style="display: block;">
+        <div style="display: flex; border: 1px solid black; margin-left: 30px;">
+            <div style="border: 1px solid purple;">
+                <canvas id="canvas" height="150px" width="150px"></canvas>
+            </div>
+            <div style="width: 100px; height: 100px; position: relative; margin-left: 70px; background-color: aqua;">
+                <div style="width: 50px; height: 50px; position: absolute; margin-left: 20px;margin-top: 10px; background-color: bisque;">嗯哼</div>
+            </div>
+        </div>
+        <div style="display: flex; border: 5px solid blue; margin-left: 30px;">
+            <div>
+                <canvas id="canvas1" height="150px" width="150px"></canvas>
+            </div>
+            <div style="width: 100px; height: 100px; position: absolute; margin-left: 30px; background-color: aqua;">
+                <div style="width: 50px; height: 50px; position: absolute; margin-left: 20px;margin-top: 10px; background-color: bisque;">嗯哼</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

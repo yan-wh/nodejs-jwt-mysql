@@ -90,11 +90,11 @@ app.set('views', path.join(__dirname, 'pages'))
 
 
 
-app.use(cookieSession({
-    name: 'session',
-    secret: 'user',
-    maxAge: 60 * 60 *24
-}))
+// app.use(cookieSession({
+//     name: 'session',
+//     secret: 'user',
+//     maxAge: 0.5
+// }))
 
 
 //响应码

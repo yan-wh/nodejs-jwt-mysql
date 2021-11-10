@@ -6,7 +6,7 @@ const config = {
     password: "root"
 }
 
-
+// exports.db 与 module.exports.db 是等价的
 exports.db = (sql,sqlParams)=>{
     sqlParams = sqlParams? sqlParams:[]
     return new Promise((resolve,reject)=>{
